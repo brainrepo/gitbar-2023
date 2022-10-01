@@ -1,0 +1,64 @@
+---
+import { Image } from "@astrojs/image/components";
+import { Episode } from "@podverse/podcast-feed-parser";
+import slugify from "slugify";
+import BackButton from "../../components/BackButton.astro";
+import Layout from "../../layouts/Layout.astro";
+
+
+
+export async function getStaticPaths() {
+  return [{
+    name: "mattia tommasone",
+    nickName: "raibaz",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'raibaz.png'
+  },
+  {
+    name: "alessio biancalana",
+    nickName: "dottor blaster",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'dottor-blaster.png'
+  },
+].map(s => ( {
+          params: { slug: slugify(s.nickName) },
+          props: { speaker: s }
+        }))
+}
+
+const { speaker } = Astro.props;
+---
+
+<Layout title="Hosts">
+
+  <main class="relative flex flex-col justify-center">
+    <BackButton />
+    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5 ">
+
+        <div class="grid grid-cols-[1fr_4fr] gap-4 items-center">
+          <Image
+          alt="copertina episodio"
+          src={speaker.imageURL}
+          width={200}
+          height={220}
+          class=""
+        />
+
+        <div class="flex flex-col items-start flex-4 space-y-3">
+          <h1 class="mt-2 text-4xl font-bold text-slate-900">
+            {speaker.name} <span class="text-slate-500 font-normal">{speaker.nickName}</span>
+          </h1>
+        
+            
+    
+          <p class=" text-slate-800 leading-relaxed" set:html={speaker.about}></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</Layout>

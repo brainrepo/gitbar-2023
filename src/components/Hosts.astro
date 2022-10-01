@@ -1,0 +1,28 @@
+---
+import { Image } from "@astrojs/image/components";
+
+---
+
+<section> 
+    <Image src='/mauro.png' width={70} height={80} alt="mauro" class="mx-auto hidden lg:block"/>
+    <h1 class="text-sm uppercase text-center  font-bold text-slate-900 my-3 hidden lg:block">Served chilled by @brainrepo with:</h1>
+     <ul class="grid grid-cols-6 gap-1 max-w-lg mx-auto lg:mx-0 ">
+        
+    {[
+      // "mauro",
+      "luca",
+      "leonardo",
+      "carmine",
+      "raibaz",
+      "dottor-blaster",
+      "andrea",
+    ].sort((a, b) => 0.5 - Math.random()).map((host) => (
+      <li>
+        <a href={`/speakers/${host}`}>
+            <Image src={`/${host}.png`} width={70} height={80} alt={host} />
+        </a>
+        
+        
+      </li>
+    ))}
+  </ul></section>

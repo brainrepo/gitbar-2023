@@ -1,0 +1,116 @@
+---
+import { Image } from "@astrojs/image/components";
+import { Episode } from "@podverse/podcast-feed-parser";
+import BackButton from "../../components/BackButton.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  getPodcastFeed,
+  getLegacySlug,
+  getSlug,
+  getSpreakerId,
+  getSeason, formatDate, formatDuration, prepareTitle } from "../../utils";
+
+
+export async function getStaticPaths() {
+  const { episodes } = await getPodcastFeed(
+    "https://www.spreaker.com/show/4173756/episodes/feed"
+  );
+  return episodes.reduce(
+    (acc: { params: { slug: string; props: Episode } }[], e: Episode) => {
+      return [
+        ...acc,
+        {
+          params: { slug: getLegacySlug(e) },
+          props: { e },
+        },
+        {
+          params: { slug: getSlug(e) },
+          props: { e },
+        },
+      ];
+    },
+    []
+  );
+}
+
+const { e } = Astro.props;
+---
+
+<Layout title="Welcome to Astro.">
+
+  <main class="relative lg:min-h-screen flex flex-col">
+    <BackButton />
+    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5">
+      <header class="flex flex-col  3xl:-ml-24 3xl:-mr-24">
+        <div
+          class="grid grid-cols-[max(250px),_1fr] gap-4 items-center break-words"
+        >
+          <Image
+            alt="copertina episodio"
+            src={e.imageURL}
+            width={250}
+            height={250}
+            class="rounded-lg"
+          />
+
+          <div class="flex flex-col items-start">
+            <time
+              datetime="2022-02-17T00:00:00.000Z"
+              class="text-sm leading-4 text-yellow-500 uppercase"
+            >
+              {formatDate(e.pubDate)}
+            </time>
+            <h1 class="mt-2 text-4xl font-bold text-slate-900">
+              {prepareTitle(e.title)[1]}
+            </h1>
+          
+              <div
+                id="episode-4-title"
+                class="mt-2 text-lg font-bold text-slate-900 group-hover:text-slate-100"
+              >
+               
+                <span
+                  class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
+                >
+                  Stagione {getSeason(e) }</span
+                >
+                <span
+                class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
+              >
+                Episodio {prepareTitle(e.title)[0]}</span
+              >
+              <span
+              class="bg-slate-800 text-white inline-block font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
+            >
+              Durata  {formatDuration(e.duration)}</span
+            >
+       
+            </div>
+      
+          </div>
+        </div>
+      </header>
+    
+      <p class=" text-slate-800 leading-relaxed" set:html={e.description.split('##')[0].split('<br />').filter(e => e != '').join('<br />')}></p>
+      {e.description.split('##').slice(1).map(paragraph => (
+        <div>
+          <h2 class="text-slate-800 text-3xl leading-loose">{paragraph.split('<br />')[0]}</h2>
+          {paragraph.split('<br />').slice(1).map(line => <p
+                  class="leading-8 text-slate-700"
+                  set:html={line}></p>)}
+                  </div>
+                  ))
+        }
+    </div>
+    <div
+      class="sticky bottom-0 -ml-[129px] right-0 h-[130px] z-20 bg-white overflow-hidden shadow-lg"
+    >
+      <iframe
+        class="top-0 bottom-0 w-full h-[130px]"
+        src={`https://widget.spreaker.com/player?episode_id=${getSpreakerId(
+          e
+        )}&theme=light&playlist=false&playlist-continuous=false&autoplay=false&live-autoplay=false&chapters-image=true&episode_image_position=left&hide-logo=true&hide-likes=false&hide-comments=false&hide-sharing=false&hide-download=true`}
+      ></iframe>
+    </div>
+  </main>
+</Layout>

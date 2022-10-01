@@ -1,0 +1,25 @@
+---
+import EpisodeCard from "../components/EpisodeCard.astro";
+import Hosts from "../components/Hosts.astro";
+import Layout from "../layouts/Layout.astro";
+import { getPodcastFeed } from "../utils";
+
+const data = await getPodcastFeed(
+  "https://www.spreaker.com/show/4173756/episodes/feed"
+)
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <div class="lg:hidden bg-yellow-400 pb-3">
+      <Hosts />
+    </div>
+    
+    <ul
+      role="list"
+      class="max-w-4xl 4xl:max-w-7xl mx-auto w-full p-2 sm:p-4 md:p-8 lg:p-8 grid 4xl:grid-cols-2 gap-2"
+    >
+      {data.episodes.map((e) => <EpisodeCard {...e} />)}
+    </ul>
+  </main>
+</Layout>
