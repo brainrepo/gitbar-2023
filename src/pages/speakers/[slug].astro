@@ -8,7 +8,8 @@ import Layout from "../../layouts/Layout.astro";
 
 
 export async function getStaticPaths() {
-  return [{
+
+  const speakers = [{
     name: "mattia tommasone",
     nickName: "raibaz",
     about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
@@ -24,7 +25,52 @@ Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hib
 Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
     imageURL: 'dottor-blaster.png'
   },
-].map(s => ( {
+  ,
+  {
+    name: "leo rossi",
+    nickName: "leo",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'leo.png'
+  },
+  {
+    name: "luca",
+    nickName: "chumkiu",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'chumkiu.png'
+  },
+  {
+    name: "carmine",
+    nickName: "guabanal",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'guabanal.png'
+  },
+  {
+    name: "andrea",
+    nickName: "jelly-belly",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'jelly-belly.png'
+  }
+  ,
+  {
+    name: "brainrepo",
+    nickName: "brainrepo",
+    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
+
+Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
+    imageURL: 'brainrepo.png'
+  }
+]
+
+
+  return speakers.map(s => ( {
           params: { slug: slugify(s.nickName) },
           props: { speaker: s }
         }))
@@ -39,9 +85,9 @@ const { speaker } = Astro.props;
     <BackButton />
     <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5 ">
 
-        <div class="grid grid-cols-[1fr_4fr] gap-4 items-center">
+        <div class="grid grid-cols-1 justify-center md:grid-cols-[1fr_4fr] gap-4 items-center">
           <Image
-          alt="copertina episodio"
+          alt={speaker.nickName}
           src={speaker.imageURL}
           width={200}
           height={220}

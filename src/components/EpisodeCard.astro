@@ -14,12 +14,12 @@ const e = Astro.props;
 ---
 
 <a
-  class="hover:bg-slate-800 rounded-md md:rounded-xl group overflow-hidden transition-all hover:scale-95 md:hover:scale-105"
+  class="bg-white z-20 hover:bg-slate-800 rounded-md md:rounded-xl group overflow-hidden transition-all hover:scale-95 md:hover:scale-105"
   aria-labelledby={e.title}
   class="w-auto overflow-hidden"
   href={"/episodes/" + getSlug(e)}
 >
-  <div class="grid grid-cols-[minmax(50px,100px)_minmax(300px,_1fr)] md:grid-cols-[minmax(50px,200px)_minmax(300px,_1fr)] md:p-2 gap-4 break-words items-center lg:items-start">
+  <div class="grid grid-cols-[minmax(50px,100px)_minmax(300px,_1fr)] md:grid-cols-[minmax(50px,200px)_minmax(300px,_1fr)] md:p-2 gap-2 md:gap-4 break-words items-center lg:items-start">
 
     <Image
       alt="copertina episodio"
@@ -32,7 +32,7 @@ const e = Astro.props;
     <div class="flex flex-col items-start">
       <time
         datetime="2022-02-17T00:00:00.000Z"
-        class="mb-1 md:mb-0 text-xs md:text-sm leading-none md:leading-4 text-yellow-500 uppercase"
+        class="md:mb-1 md:mb-0 text-xs md:text-sm leading-none md:leading-4 text-yellow-500 uppercase"
       >
         {formatDate(e.pubDate)}
       </time>
@@ -42,7 +42,7 @@ const e = Astro.props;
           class="mt-px md:mt-2 text-base leading-tight md:text-lg font-bold text-slate-900 group-hover:text-slate-100"
         >
           <span
-            class="bg-slate-800 text-white font-mono rounded font-normal text-xs md:text-sm px-1 mr-1  md:px-2 md:mr-2 md:py-1 group-hover:hidden transition-all"
+            class="bg-slate-800 text-white font-mono rounded font-normal inline-block align-middle text-2xs md:text-sm px-1 mr-px  md:px-2 md:mr-2 md:py-1 group-hover:hidden transition-all"
           >
             {`* ${prepareTitle(e.title)[0]}`}</span
           >

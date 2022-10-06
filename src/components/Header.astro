@@ -1,35 +1,26 @@
 ---
-import { Image } from "@astrojs/image/components";
 import Hosts from "./Hosts.astro";
-
+import { Image } from "@astrojs/image/components";
 ---
 
 <header
-  class="sticky lg:max-h-screen z-30 top-0 p-6 bg-yellow-400 lg:flex lg:w-86 lg:items-start lg:overflow-y-auto xl:w-120"
+  class="header sticky lg:max-h-screen z-30 top-0 shadow lg:p-6 bg-yellow-400 lg:flex lg:w-86 lg:items-start lg:overflow-y-auto xl:w-120"
 >
   <div
-    class="space-y-6 relative z-10 mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto  lg:px-8 xl:px-12"
+    class="max-w-4xl 4xl:max-w-7xl mx-auto p-3 flex lg:flex-col space-x-3 lg:space-x-0 items-center lg:space-y-6 relative z-10 lg:min-h-full lg:flex-auto  lg:px-8 xl:px-12"
   >
     <a
-      class="relative mx-auto block overflow-hidden"
+      class="flex-grow-0 h-16 w-16 md:h-20 md:w-20 lg:h-64 lg:w-64"
       aria-label="Homepage"
       href="/"
-      ><img
-        alt=""
-        src="https://www.gitbar.it/static/151751c7a7795ca87f026014fc95f835/2a4de/me.png"
-        width="960"
-        height="960"
-        decoding="async"
-        data-nimg="future"
-        class="w-full h-64 object-contain object-center"
-        style="color:transparent"
-      />
+      >
+      <Image src={`mauro.png`} class="h-16 md:h-20 lg:h-64 object-contain object-center image transition-all" width={300} height={330} alt="Gitbar logo" /> 
     </a>
-    <div class="mt-10 text-center lg:mt-12 lg:text-left">
-      <h1 class="text-4xl text-gray-900">
+    <div class="lg:mt-12 text-left details space-y-0.5">
+      <h1 class="text-lg md:text-xl lg:text-4xl leading-none lg:text-center text-gray-900">
        <span class="font-bold">Gitbar</span> Italian developer podcast
       </h1>
-      <p class="mt-3 text-lg italic leading-8 text-gray-800">
+      <p class=" text-xs sm:text-sm lg:text-lg lg:text-center leading-none text-gray-800 opacity-60">
         Conversazioni sullo sviluppo software fatte davanti a una birra.
       </p>
     </div>

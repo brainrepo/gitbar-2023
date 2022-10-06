@@ -1,4 +1,5 @@
 ---
+
 import { Image } from "@astrojs/image/components";
 
 ---
@@ -10,16 +11,16 @@ import { Image } from "@astrojs/image/components";
         
     {[
       // "mauro",
-      "luca",
-      "leonardo",
-      "carmine",
+      "chumkiu",
+      "leo",
+      "guabanal",
       "raibaz",
       "dottor-blaster",
-      "andrea",
+      "jelly-belly",
     ].sort((a, b) => 0.5 - Math.random()).map((host) => (
       <li>
         <a href={`/speakers/${host}`}>
-            <Image src={`/${host}.png`} width={70} height={80} alt={host} />
+             <Image src={`/${host}.png`} width={70} height={80} alt={host} /> 
         </a>
         
         

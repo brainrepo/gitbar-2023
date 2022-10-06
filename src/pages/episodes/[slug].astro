@@ -40,10 +40,10 @@ const { e } = Astro.props;
 
   <main class="relative lg:min-h-screen flex flex-col">
     <BackButton />
-    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5">
+    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all">
       <header class="flex flex-col  3xl:-ml-24 3xl:-mr-24">
         <div
-          class="md:grid grid-cols-[max(250px),_1fr] gap-4 items-center break-words"
+          class="md:grid w-full grid-cols-[max(250px),_1fr] flex flex-col gap-4  break-words"
         >
           <Image
             alt="copertina episodio"
@@ -103,10 +103,10 @@ const { e } = Astro.props;
         }
     </div>
     <div
-      class="sticky bottom-0 -ml-[129px] right-0 h-[130px] z-20 bg-white overflow-hidden shadow-lg"
+      class="sticky bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
     >
       <iframe
-        class="top-0 bottom-0 w-full h-[130px]"
+        class="top-0 bottom-0 w-full h-[100px] lg:h-[130px]"
         src={`https://widget.spreaker.com/player?episode_id=${getSpreakerId(
           e
         )}&theme=light&playlist=false&playlist-continuous=false&autoplay=false&live-autoplay=false&chapters-image=true&episode_image_position=left&hide-logo=true&hide-likes=false&hide-comments=false&hide-sharing=false&hide-download=true`}
