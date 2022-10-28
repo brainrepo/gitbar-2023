@@ -79,7 +79,27 @@ Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hib
 const { speaker } = Astro.props;
 ---
 
-<Layout title="Hosts">
+<Layout title="Hosts" seo={{
+// extending the default link tags
+link: [{ rel: "icon", href: "/favicon.ico" }],
+
+meta: [
+    {
+        name: "twitter:image",
+        content:speaker.imageURL,
+    },
+    { name: "twitter:title", content: `${speaker.name} - Gitbar - Il podcast dei developer italiani` },
+    { name: "title", content: `${speaker.name} - Gitbar - Il podcast dei developer italiani` },
+    { name: "twitter:description", content: speaker.about},
+    { name: "description", content: speaker.about},
+    { name: "author", content: speaker.nickName},
+    { name: "og:type", content: "website"},
+    { name: "og:image", content: speaker.imageURL},
+    { name: "og:url", content: "https://www.gitbar.it/speakers/"+speaker.nickName},
+    { name: "theme-color", content: "#F1C410"},
+    { name: "image", content: speaker.imageURL}
+],
+}}>
 
   <main class="relative flex flex-col justify-center">
     <BackButton />
