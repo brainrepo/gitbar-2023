@@ -29,5 +29,8 @@
   "devDependencies": {
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.5.5"
+  },
+  "volta": {
+    "node": "18.12.0"
   }
 }
