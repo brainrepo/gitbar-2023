@@ -3,6 +3,9 @@ import { format, parse, differenceInYears } from "date-fns";
 import { it } from "date-fns/locale/index.js";
 import slugify from "slugify";
 
+const mainTitle = "Gitbar - Il podcast dei developer italiani"
+const mainUrl = "https://www.gitbar.it";
+
 export const getSpreakerId = (episode: Episode) =>
   episode.guid.replace("https://api.spreaker.com/episode/", "");
 
@@ -66,3 +69,78 @@ export const formatDate = (pubDate: string): string =>
   format(new Date(pubDate), "EEEE, do MMMM yyyy 'ore' k:kk", {
     locale: it,
   });
+
+export const buildTitle = (...pageTitles:string[]) => [...pageTitles, mainTitle].filter(item=>item!=="").join(" | ");
+export const optimizeMetadescription = (description: string) => {
+    if(description.split("##").length > 1) {
+        return description.split("##")[0].replace(/<.*?\/>/g, "")
+    }
+    return description.split(".")[0].replace(/<.*?\/>/g, "")
+};
+export const buildEpisodeUrl = (episode: Episode) => mainUrl+"/episodes/" + getSlug(episode);
+export const buildSpeakerUrl = (speaker) => mainUrl+"/speakers/" + speaker.nickName;
+
+export const buildStandardMetaObjects = ((metas:Record<string,string>)=> {
+
+    const extendedSeo = {
+        meta:[
+            {
+                name: "author",
+                content: "Brainrepo"
+            },
+            {
+                name: "og:type",
+                content: "website"
+            },
+            {
+                name: "theme-color",
+                content: "#F1C410"
+            }
+    ]};
+
+    for (const name in metas) {
+        const content = metas[name];
+        extendedSeo.meta.push({name, content});
+        switch(name) {
+            case "description" :
+                if(!metas.hasOwnProperty("twitter:description")) {
+                    extendedSeo.meta.push({
+                        name: "twitter:description",
+                        content
+                    });
+                }
+                break;
+            case "title" :
+                if(!metas.hasOwnProperty("twitter:title")) {
+                    extendedSeo.meta.push({
+                        name: "twitter:title",
+                        content
+                    });
+                }
+                break;
+            case "url" :
+                if(!metas.hasOwnProperty("og:url")) {
+                    extendedSeo.meta.push({
+                        name: "og:url",
+                        content
+                    });
+                }
+               break;
+            case "image" :
+                if(!metas.hasOwnProperty("og:image")) {
+                    extendedSeo.meta.push({
+                        name: "og:image",
+                        content
+                    });
+                }
+                if(!metas.hasOwnProperty("twitter:image")) {
+                    extendedSeo.meta.push({
+                        name: "twitter:image",
+                        content
+                    });
+                }
+                break;
+        }
+    }
+    return extendedSeo;
+})

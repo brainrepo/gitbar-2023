@@ -4,6 +4,10 @@ import { Episode } from "@podverse/podcast-feed-parser";
 import BackButton from "../../components/BackButton.astro";
 import Layout from "../../layouts/Layout.astro";
 import {
+  buildTitle,
+  optimizeMetadescription,
+  buildEpisodeUrl,
+  buildStandardMetaObjects,
   getPodcastFeed,
   getLegacySlug,
   getSlug,
@@ -36,7 +40,13 @@ export async function getStaticPaths() {
 const { e } = Astro.props;
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={buildTitle(prepareTitle(e.title)[1])}
+        seo={buildStandardMetaObjects({
+          title: buildTitle(prepareTitle(e.title)[1]),
+          description: optimizeMetadescription(e.description),
+          url: buildEpisodeUrl(e),
+          image: e.imageURL,
+        })}>
 
   <main class="relative lg:min-h-screen flex flex-col">
     <BackButton />
