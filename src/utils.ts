@@ -2,6 +2,7 @@ import feedParser, { Episode } from "@podverse/podcast-feed-parser";
 import { format, parse, differenceInYears } from "date-fns";
 import { it } from "date-fns/locale/index.js";
 import slugify from "slugify";
+import MarkdownIt from "markdown-it"
 
 const mainTitle = "Gitbar - Il podcast dei developer italiani"
 const mainUrl = "https://www.gitbar.it";
@@ -144,3 +145,14 @@ export const buildStandardMetaObjects = ((metas:Record<string,string>)=> {
     }
     return extendedSeo;
 })
+
+const markdownInstance =  MarkdownIt({
+    html:true,
+    breaks:true
+})
+export const markdown = (mdText:string)=> {
+    mdText = mdText.replace(/<br \/>/g, "\n");
+    return markdownInstance.render(mdText)
+        .replace(/<h2>/g, "<h2 class=\"text-slate-800 text-3xl leading-loose\">")
+        .replace(/<p>/g, "<p class=\"text-slate-800 leading-relaxed\">");
+}

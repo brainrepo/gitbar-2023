@@ -3,6 +3,7 @@ import { Image } from "@astrojs/image/components";
 import { Episode } from "@podverse/podcast-feed-parser";
 import BackButton from "../../components/BackButton.astro";
 import Layout from "../../layouts/Layout.astro";
+
 import {
   buildTitle,
   optimizeMetadescription,
@@ -12,7 +13,9 @@ import {
   getLegacySlug,
   getSlug,
   getSpreakerId,
+  markdown,
   getSeason, formatDate, formatDuration, prepareTitle } from "../../utils";
+
 
 
 export async function getStaticPaths() {
@@ -38,6 +41,7 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
+
 ---
 
 <Layout title={buildTitle(prepareTitle(e.title)[1])}
@@ -100,17 +104,8 @@ const { e } = Astro.props;
           </div>
         </div>
       </header>
-    
-      <p class=" text-slate-800 leading-relaxed" set:html={e.description.split('##')[0].split('<br />').filter(e => e != '').join('<br />')}></p>
-      {e.description.split('##').slice(1).map(paragraph => (
-        <div>
-          <h2 class="text-slate-800 text-3xl leading-loose">{paragraph.split('<br />')[0]}</h2>
-          {paragraph.split('<br />').slice(1).map(line => <p
-                  class="leading-8 text-slate-700"
-                  set:html={line}></p>)}
-                  </div>
-                  ))
-        }
+
+      <p class=" text-slate-800 leading-relaxed" set:html={markdown(e.description)}></p>
     </div>
     <div
       class="sticky bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
