@@ -2,34 +2,20 @@
 import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
 import Layout from "../layouts/Layout.astro";
-import { getPodcastFeed } from "../utils";
+import { getPodcastFeed, buildTitle, buildStandardMetaObjects } from "../utils";
 
 const data = await getPodcastFeed(
   "https://www.spreaker.com/show/4173756/episodes/feed"
 )
 ---
 
-<Layout title="Gitbar - Il podcast dei developer italiani" seo={{
-// extending the default link tags
-link: [{ rel: "icon", href: "/favicon.ico" }],
-
-meta: [
-  {
-    name: "twitter:image",
-    content: "/mauro.png",
-  },
-  { name: "twitter:title", content: "Gitbar - Il podcast dei developer italiani" },
-  { name: "title", content: "Gitbar - Il podcast dei developer italiani" },
-  { name: "twitter:description", content: "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."},
-  { name: "description", content: "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."},
-  { name: "author", content: "brainrepo"},
-  { name: "og:type", content: "website"},
-  { name: "og:image", content: "/mauro.png"},
-  { name: "og:url", content: "https://www.gitbar.it"},
-  { name: "theme-color", content: "#F1C410"},
-  { name: "image", content: "/mauro.png"}
-  ],
-}}>
+<Layout title={buildTitle()}
+        seo={buildStandardMetaObjects({
+          title: buildTitle(),
+          description: "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
+          url: "https://www.gitbar.it",
+          image:"/mauro.png",
+        })}>
   <main>
     <div class="lg:hidden pb-3">
       here hosts and more
