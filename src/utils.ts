@@ -80,10 +80,17 @@ export const optimizeMetadescription = (description: string) => {
 };
 export const buildEpisodeUrl = (episode: Episode) => mainUrl+"/episodes/" + getSlug(episode);
 export const buildSpeakerUrl = (speaker) => mainUrl+"/speakers/" + speaker.nickName;
+export const buildHomepageUrl = () => mainUrl;
 
 export const buildStandardMetaObjects = ((metas:Record<string,string>)=> {
 
     const extendedSeo = {
+        link: [
+            metas.url? {
+                rel: "canonical",
+                href: metas.url
+            } : null
+        ].filter(link=>link !== null),
         meta:[
             {
                 name: "author",
