@@ -2,7 +2,7 @@
 import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
 import Layout from "../layouts/Layout.astro";
-import { getPodcastFeed, buildTitle, buildStandardMetaObjects } from "../utils";
+import { getPodcastFeed, buildTitle, buildStandardMetaObjects, buildHomepageUrl } from "../utils";
 
 const data = await getPodcastFeed(
   "https://www.spreaker.com/show/4173756/episodes/feed"
@@ -13,7 +13,7 @@ const data = await getPodcastFeed(
         seo={buildStandardMetaObjects({
           title: buildTitle(),
           description: "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
-          url: "https://www.gitbar.it",
+          url: buildHomepageUrl(),
           image:"/mauro.png",
         })}>
   <main>
