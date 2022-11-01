@@ -9,13 +9,7 @@ const data = await getPodcastFeed(
 )
 ---
 
-<Layout title={buildTitle()}
-        seo={buildStandardMetaObjects({
-          title: buildTitle(),
-          description: "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
-          url: buildHomepageUrl(),
-          image:"/mauro.png",
-        })}>
+<Layout>
   <main>
     <div class="lg:hidden pb-3">
       here hosts and more

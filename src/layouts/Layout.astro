@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import SEO from "../components/SEO.astro";
 export interface Props {
-  seo: Object;
+  seo?: Object;
 }
 
 const { seo } = Astro.props;
@@ -13,8 +13,8 @@ const { seo } = Astro.props;
  * So, we need to remove it inside the extended seo and put it inside the canonical attribute
  */
 
-const canonical = seo.link?.find(link => link.rel === "canonical")?.href
-seo.link = seo.link?.filter(link => link.rel !== "canonical")
+// const canonical = seo.link?.find(link => link.rel === "canonical")?.href
+// seo.link = seo.link?.filter(link => link.rel !== "canonical")
 ---
 
 <!DOCTYPE html>

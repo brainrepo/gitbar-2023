@@ -5,7 +5,6 @@ import slugify from "slugify";
 import MarkdownIt from "markdown-it"
 
 const mainTitle = "Gitbar - Il podcast dei developer italiani"
-const mainUrl = "https://www.gitbar.it";
 
 export const getSpreakerId = (episode: Episode) =>
   episode.guid.replace("https://api.spreaker.com/episode/", "");
@@ -78,80 +77,7 @@ export const optimizeMetadescription = (description: string) => {
     }
     return description.split(".")[0].replace(/<.*?\/>/g, "")
 };
-export const buildEpisodeUrl = (episode: Episode) => mainUrl+"/episodes/" + getSlug(episode);
-export const buildSpeakerUrl = (speaker) => mainUrl+"/speakers/" + speaker.nickName;
-export const buildHomepageUrl = () => mainUrl;
 
-export const buildStandardMetaObjects = ((metas:Record<string,string>)=> {
-
-    const extendedSeo = {
-        link: [
-            metas.url? {
-                rel: "canonical",
-                href: metas.url
-            } : null
-        ].filter(link=>link !== null),
-        meta:[
-            {
-                name: "author",
-                content: "Brainrepo"
-            },
-            {
-                name: "og:type",
-                content: "website"
-            },
-            {
-                name: "theme-color",
-                content: "#F1C410"
-            }
-    ]};
-
-    for (const name in metas) {
-        const content = metas[name];
-        extendedSeo.meta.push({name, content});
-        switch(name) {
-            case "description" :
-                if(!metas.hasOwnProperty("twitter:description")) {
-                    extendedSeo.meta.push({
-                        name: "twitter:description",
-                        content
-                    });
-                }
-                break;
-            case "title" :
-                if(!metas.hasOwnProperty("twitter:title")) {
-                    extendedSeo.meta.push({
-                        name: "twitter:title",
-                        content
-                    });
-                }
-                break;
-            case "url" :
-                if(!metas.hasOwnProperty("og:url")) {
-                    extendedSeo.meta.push({
-                        name: "og:url",
-                        content
-                    });
-                }
-               break;
-            case "image" :
-                if(!metas.hasOwnProperty("og:image")) {
-                    extendedSeo.meta.push({
-                        name: "og:image",
-                        content
-                    });
-                }
-                if(!metas.hasOwnProperty("twitter:image")) {
-                    extendedSeo.meta.push({
-                        name: "twitter:image",
-                        content
-                    });
-                }
-                break;
-        }
-    }
-    return extendedSeo;
-})
 
 const markdownInstance =  MarkdownIt({
     html:true,

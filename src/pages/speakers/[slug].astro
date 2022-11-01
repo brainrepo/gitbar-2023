@@ -4,7 +4,7 @@ import { Episode } from "@podverse/podcast-feed-parser";
 import slugify from "slugify";
 import BackButton from "../../components/BackButton.astro";
 import Layout from "../../layouts/Layout.astro";
-import {buildTitle, buildStandardMetaObjects, buildSpeakerUrl} from "../../utils";
+import {buildTitle} from "../../utils";
 
 
 export async function getStaticPaths() {
@@ -86,10 +86,6 @@ speaker.metaDescription = speaker.metaDescription || speaker.about.split(".")[0]
 
 <Layout seo={{ 
 		title: buildTitle(speaker.name), 
-        title: buildTitle(speaker.name),
-		title: buildTitle(speaker.name), 
-		description: speaker.metaDescription, 
-        description: speaker.metaDescription,
 		description: speaker.metaDescription, 
 		image: speaker.imageUrl,
 	}}
