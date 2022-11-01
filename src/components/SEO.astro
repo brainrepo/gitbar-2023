@@ -1,0 +1,53 @@
+---
+const { seo } = Astro.props;
+
+const titleHomepage = "Gitbar - Il podcast dei developer italiani"
+const descHomepage = "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."
+
+const isHomepage = Astro.url.pathname === '/' 
+
+const meta = {
+	name: "Gitbar",
+	title: isHomepage ? titleHomepage : seo.title,
+	description: isHomepage ? descHomepage : seo.description,
+	image: isHomepage ? "/mauro.png" : seo.image,
+	url: isHomepage ? "https://www.gitbar.it" : Astro.url,
+	color: "#F1C410"
+}
+
+const metatags = [
+	{ name: "description", content: meta.description},
+	{ name: "theme-color", content: meta.color },
+	{ name: "twitter:creator", content: "brainrepo" },
+	{ name: "twitter:title", content: meta.title },
+	{ name: "twitter:image", content: meta.image },
+	{ name: "twitter:image:alt", content: meta.title },
+	{ name: "twitter:description", content: meta.description },
+]
+const ogMetatags = [
+	{ property: "og:type", content: "website" },
+	{ property: "og:site_name", content: meta.name },
+	{ property: "og:title", content: meta.title },
+	{ property: "og:description", content: meta.description },
+	{ property: "og:image", content: meta.image },
+	{ property: "og:url", content: meta.url },
+]
+
+const schemaOrgBase = [{
+	'@context': 'http://schema.org',
+	'@type': 'WebSite',
+	url: meta.url,
+	name: meta.title,
+	description: meta.description,
+	alternateName: meta.title,
+}]
+---
+
+<title>{meta.title}</title>
+
+{metatags.map( ({name,content}) => <meta name={name} content={content} /> )}
+
+{ogMetatags.map( ({property,content}) => <meta property={property} content={content} />)}
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrgBase)} />
+
