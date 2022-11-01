@@ -44,14 +44,11 @@ const { e } = Astro.props;
 
 ---
 
-<Layout title={buildTitle(prepareTitle(e.title)[1])}
-        seo={buildStandardMetaObjects({
-          title: buildTitle(prepareTitle(e.title)[1]),
-          description: optimizeMetadescription(e.description),
-          url: buildEpisodeUrl(e),
-          image: e.imageURL,
-        })}>
-
+<Layout seo={{
+	title: buildTitle(prepareTitle(e.title)[1]),
+	description: optimizeMetadescription(e.description),
+	image: e.imageURL
+}}>
   <main class="relative lg:min-h-screen flex flex-col">
     <BackButton />
     <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all">

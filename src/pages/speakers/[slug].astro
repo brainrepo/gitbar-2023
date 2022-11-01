@@ -84,13 +84,15 @@ speaker.metaDescription = speaker.metaDescription || speaker.about.split(".")[0]
 
 ---
 
-<Layout title={buildTitle(speaker.nickName)}
-        seo={buildStandardMetaObjects({
+<Layout seo={{ 
+		title: buildTitle(speaker.name), 
         title: buildTitle(speaker.name),
+		title: buildTitle(speaker.name), 
+		description: speaker.metaDescription, 
         description: speaker.metaDescription,
-        url: buildSpeakerUrl(speaker),
-        image: speaker.imageURL,
-    })}
+		description: speaker.metaDescription, 
+		image: speaker.imageUrl,
+	}}
 >
 
   <main class="relative flex flex-col justify-center">
