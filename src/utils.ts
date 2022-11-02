@@ -163,3 +163,49 @@ export const markdown = (mdText:string)=> {
         .replace(/<h2>/g, "<h2 class=\"text-slate-800 text-3xl leading-loose\">")
         .replace(/<p>/g, "<p class=\"text-slate-800 leading-relaxed\">");
 }
+
+export const getCoHosts = () => {
+
+  const coH = {
+    "coHosts": [
+      {
+        "name": "mattia tommasone",
+        "nickName": "raibaz",
+        "about": "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "imageURL": "/raibaz.png"
+      },
+      {
+        "name": "alessio biancalana",
+        "nickName": "dottor blaster",
+        "about": "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "imageURL": "/dottor-blaster.png"
+      },
+      {
+        "name": "leo rossi",
+        "nickName": "leo",
+        "about": "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "imageURL": "/leo.png"
+      },
+      {
+        "name": "luca",
+        "nickName": "chumkiu",
+        "about": "Ama definirsi Programmatore, e lo fa dal 2003: reinventa la ruota, assapora la vaniglia ed usa jQuery per riconoscenza.<br>Attualmente impegnato come CTO in una misteriosa startup.<br>Lo appassionano tante cose: dalla comunicazione all'usabilità, passando per la DX, l'Agile e la gestione di prodotto.<br>Appassionato papà, scopre coi suoi figli come fare le cose che avrebbe dovuto imparare da piccolo (come per esempio risolvere il cubo di Rubik).<br>Nel copioso tempo libero, suona la chitarra acustica in fingerpicking, fa ottime pizze napoletane.<br>Il suo prossimo obbiettivo è quello di non farsi più umiliare a scacchi su chess(.)com",
+        "imageURL": "/chumkiu.png"
+      },
+      {
+        "name": "carmine",
+        "nickName": "guabanal",
+        "about": "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "imageURL": "/guabanal.png"
+      },
+      {
+        "name": "Andrea Giannantonio",
+        "nickName": "JellyBellyDev",
+        "about": "Abruzzese DOC ma romano d’adozione, grande appassionato di tecnologia, musica rap, serie tv e buon cibo. Si laurea in Tecnologie Informatiche alla Sapienza di Roma e dal 2008 macina codice in php e js con tanto focus sull'automazione. La sua fame di sapere lo porta ad esplorare sempre nuove tecnologie e metodologie. Negli ultimi anni ha sposato a pieno il tema della developer experience ed è un attivo sostenitore di diverse community e del mondo open source.",
+        "imageURL": "/JellyBellyDev.png"
+      }
+  ]}
+
+  return coH.coHosts;
+
+};
