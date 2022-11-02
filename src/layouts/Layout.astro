@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Matomo from "../components/Matomo.astro";
 import { SEO } from "astro-seo";
 export interface Props {
   title: string;
@@ -32,5 +33,6 @@ seo.link = seo.link?.filter(link => link.rel !== "canonical")
   >
     <Header/>
     <slot />
+    <Matomo/>
   </body>
 </html>
