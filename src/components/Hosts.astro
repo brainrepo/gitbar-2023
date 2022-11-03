@@ -1,6 +1,9 @@
 ---
 
 import { Image } from "@astrojs/image/components";
+import { getCoHosts } from "../utils";
+
+const coHosts = getCoHosts();
 
 ---
 
@@ -9,21 +12,11 @@ import { Image } from "@astrojs/image/components";
     <h1 class="text-sm uppercase text-center  font-bold text-slate-900 my-3 hidden lg:block">Served chilled by @brainrepo with:</h1>
      <ul class="grid grid-cols-6 gap-1 max-w-lg mx-auto lg:mx-0 ">
         
-    {[
-      // "mauro",
-      "chumkiu",
-      "leo",
-      "guabanal",
-      "raibaz",
-      "dottor-blaster",
-      "JellyBellyDev",
-    ].sort((a, b) => 0.5 - Math.random()).map((host) => (
+    {coHosts.sort((a, b) => 0.5 - Math.random()).map((coHost) => (
       <li>
-        <a href={`/speakers/${host}`}>
-             <Image src={`/${host}.png`} width={70} height={80} alt={host} /> 
+        <a href={`/speakers/${coHost.nickName}`}>
+             <Image src={`${coHost.imageURL}`} width={70} height={80} alt={coHost.name} /> 
         </a>
-        
-        
       </li>
     ))}
   </ul></section>
