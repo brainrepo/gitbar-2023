@@ -166,8 +166,7 @@ export const markdown = (mdText:string)=> {
 
 export const getCoHosts = () => {
 
-  const coH = {
-    "coHosts": [
+    return [
       {
         "name": "mattia tommasone",
         "nickName": "raibaz",
@@ -175,8 +174,8 @@ export const getCoHosts = () => {
         "imageURL": "/raibaz.png"
       },
       {
-        "name": "alessio biancalana",
-        "nickName": "dottor blaster",
+        "name": "Alessio Biancalana",
+        "nickName": "dottorblaster",
         "about": "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
         "imageURL": "/dottor-blaster.png"
       },
@@ -204,8 +203,6 @@ export const getCoHosts = () => {
         "about": "Abruzzese DOC ma romano d’adozione, grande appassionato di tecnologia, musica rap, serie tv e buon cibo. Si laurea in Tecnologie Informatiche alla Sapienza di Roma e dal 2008 macina codice in php e js con tanto focus sull'automazione. La sua fame di sapere lo porta ad esplorare sempre nuove tecnologie e metodologie. Negli ultimi anni ha sposato a pieno il tema della developer experience ed è un attivo sostenitore di diverse community e del mondo open source.",
         "imageURL": "/JellyBellyDev.png"
       }
-  ]}
-
-  return coH.coHosts;
+  ];
 
 };
