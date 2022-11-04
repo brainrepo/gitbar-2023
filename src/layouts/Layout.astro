@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Matomo from "../components/Matomo.astro";
 import SEO from "../components/SEO.astro";
 export interface Props {
   seo?: Object;
@@ -31,5 +32,6 @@ const { seo } = Astro.props;
   >
     <Header/>
     <slot />
+    <Matomo/>
   </body>
 </html>

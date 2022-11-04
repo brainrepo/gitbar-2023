@@ -4,90 +4,27 @@ import { Episode } from "@podverse/podcast-feed-parser";
 import slugify from "slugify";
 import BackButton from "../../components/BackButton.astro";
 import Layout from "../../layouts/Layout.astro";
-import {buildTitle} from "../../utils";
+import {buildTitle, getCoHosts} from "../../utils";
 
 
 export async function getStaticPaths() {
-
-  const speakers = [{
-    name: "mattia tommasone",
-    nickName: "raibaz",
-    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
-
-Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
-    imageURL: 'raibaz.png'
-  },
-  {
-    name: "alessio biancalana",
-    nickName: "dottor blaster",
-    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
-
-Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
-    imageURL: 'dottor-blaster.png'
-  },
-  ,
-  {
-    name: "leo rossi",
-    nickName: "leo",
-    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
-
-Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
-    imageURL: 'leo.png'
-  },
-  {
-    name: "luca",
-    nickName: "chumkiu",
-    about: `Ama definirsi Programmatore, e lo fa dal 2003: reinventa la ruota, assapora la vaniglia ed usa jQuery per riconoscenza.<br>Attualmente impegnato come CTO in una misteriosa startup.
-<br>Lo appassionano tante cose: dalla comunicazione all'usabilità, passando per la DX, l'Agile e la gestione di prodotto.
-<br>Appassionato papà, scopre coi suoi figli come fare le cose che avrebbe dovuto imparare da piccolo (come per esempio risolvere il cubo di Rubik).
-<br>Nel copioso tempo libero, suona la chitarra acustica in fingerpicking, fa ottime pizze napoletane.
-<br>Il suo prossimo obbiettivo è quello di non farsi più umiliare a scacchi su chess(.)com`,
-    Specialties: ``,
-    imageURL: 'chumkiu.png'
-  },
-  {
-    name: "carmine",
-    nickName: "guabanal",
-    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
-
-Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
-    imageURL: 'guabanal.png'
-  },
-  {
-    name: "Andrea Giannantonio",
-    nickName: "JellyBellyDev",
-    about: `Abruzzese DOC ma romano d’adozione, grande appassionato di tecnologia, musica rap, serie tv e buon cibo. Si laurea in Tecnologie Informatiche alla Sapienza di Roma e dal 2008 macina codice in php e js con tanto focus sull'automazione. La sua fame di sapere lo porta ad esplorare sempre nuove tecnologie e metodologie. Negli ultimi anni ha sposato a pieno il tema della developer experience ed è un attivo sostenitore di diverse community e del mondo open source.`,
-    imageURL: 'JellyBellyDev.png'
-  }
-  ,
-  {
-    name: "brainrepo",
-    nickName: "brainrepo",
-    about: `Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now
-
-Specialties: Backend development in Java with enterprise frameworks (EJB,JPA,Hibernate), web design (HTML/CSS) and development in Javascript, graphics development with OpenGL in C++, agile development methodologies.`,
-    imageURL: 'brainrepo.png'
-  }
-]
-
-
-  return speakers.map(s => ( {
-          params: { slug: slugify(s.nickName) },
-          props: { speaker: s }
-        }))
+  return getCoHosts().map(coH => ( {
+        params: { slug: slugify(coH.nickName) },
+        props: { coHost: coH }
+    }));
 }
 
-const { speaker } = Astro.props;
+const { coHost } = Astro.props;
 
 // autofill metaDescription property in case of missing. Simply get the first period
-speaker.metaDescription = speaker.metaDescription || speaker.about.split(".")[0];
+coHost.metaDescription = coHost.metaDescription || coHost.about.split(".")[0];
 
 ---
 
 <Layout seo={{ 
-		title: buildTitle(speaker.name), 
-		description: speaker.metaDescription, 
-		image: speaker.imageUrl,
+		title: buildTitle(coHost.name), 
+		description: coHost.metaDescription, 
+		image: coHost.imageUrl,
 	}}
 >
 
@@ -97,8 +34,8 @@ speaker.metaDescription = speaker.metaDescription || speaker.about.split(".")[0]
 
         <div class="grid grid-cols-1 justify-center md:grid-cols-[1fr_4fr] gap-4 items-center">
           <Image
-          alt={speaker.nickName}
-          src={speaker.imageURL}
+          alt={coHost.nickName}
+          src={coHost.imageURL}
           width={200}
           height={220}
           class=""
@@ -106,12 +43,10 @@ speaker.metaDescription = speaker.metaDescription || speaker.about.split(".")[0]
 
         <div class="flex flex-col items-start flex-4 space-y-3">
           <h1 class="mt-2 text-4xl font-bold text-slate-900">
-            {speaker.name} <span class="text-slate-500 font-normal">{speaker.nickName}</span>
+            {coHost.name} <span class="text-slate-500 font-normal">{coHost.nickName}</span>
           </h1>
-        
-            
     
-          <p class=" text-slate-800 leading-relaxed" set:html={speaker.about}></p>
+          <p class=" text-slate-800 leading-relaxed" set:html={coHost.about}></p>
         </div>
       </div>
     </div>
