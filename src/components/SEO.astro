@@ -1,19 +1,14 @@
 ---
 const { seo } = Astro.props;
 
-const titleHomepage = "Gitbar - Il podcast dei developer italiani"
-const descHomepage = "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."
-
-const isHomepage = Astro.url.pathname === '/'
-
 const canonicalUrl = new URL(seo?.canonical ?? Astro.url.pathname, Astro.site);
 
 const meta = {
 	name: "Gitbar",
-	title: isHomepage ? titleHomepage : seo.title,
-	description: isHomepage ? descHomepage : seo.description,
-	image: isHomepage ? "/mauro.png" : seo.image,
-	url: isHomepage ? "https://www.gitbar.it" : Astro.url,
+	title: seo.title,
+	description: seo.description,
+	image: seo.image ?? "/mauro.png" ,
+	url: canonicalUrl,
 	color: "#F1C410"
 }
 
