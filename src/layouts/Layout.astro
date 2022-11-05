@@ -8,14 +8,6 @@ export interface Props {
 
 const { seo } = Astro.props;
 
-/*
- * astro requires the canonical link as attribute property. If canonical attribute is missing, then astro fills it arbitrarily regardless the presence
- * of canonical url inside the extend attribute :/ (result: duplicate link canonical tag)
- * So, we need to remove it inside the extended seo and put it inside the canonical attribute
- */
-
-// const canonical = seo.link?.find(link => link.rel === "canonical")?.href
-// seo.link = seo.link?.filter(link => link.rel !== "canonical")
 ---
 
 <!DOCTYPE html>

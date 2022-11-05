@@ -42,7 +42,8 @@ const { e } = Astro.props;
 
 ---
 
-<Layout seo={{
+<Layout seo={{ 
+	canonical: `/episodes/${getSlug(e)}`,
 	title: buildTitle(prepareTitle(e.title)[1]),
 	description: optimizeMetadescription(e.description),
 	image: e.imageURL
