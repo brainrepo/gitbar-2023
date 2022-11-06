@@ -1,21 +1,13 @@
 ---
 import Header from "../components/Header.astro";
 import Matomo from "../components/Matomo.astro";
-import { SEO } from "astro-seo";
+import SEO from "../components/SEO.astro";
 export interface Props {
-  title: string;
+  seo?: Object;
 }
 
-const { title, seo } = Astro.props;
+const { seo } = Astro.props;
 
-/*
- * astro requires the canonical link as attribute property. If canonical attribute is missing, then astro fills it arbitrarily regardless the presence
- * of canonical url inside the extend attribute :/ (result: duplicate link canonical tag)
- * So, we need to remove it inside the extended seo and put it inside the canonical attribute
- */
-
-const canonical = seo.link?.find(link => link.rel === "canonical")?.href
-seo.link = seo.link?.filter(link => link.rel !== "canonical")
 ---
 
 <!DOCTYPE html>
@@ -25,8 +17,7 @@ seo.link = seo.link?.filter(link => link.rel !== "canonical")
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <SEO extend={seo} canonical={canonical} />
+    <SEO seo={seo} />
   </head>
   <body
     class="lg:grid lg:grid-cols-[minmax(300px,550px)_minmax(600px,1fr)] lg:min-h-screen"

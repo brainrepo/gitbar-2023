@@ -4,7 +4,8 @@ import { Episode } from "@podverse/podcast-feed-parser";
 import slugify from "slugify";
 import BackButton from "../../components/BackButton.astro";
 import Layout from "../../layouts/Layout.astro";
-import {buildTitle, buildStandardMetaObjects, buildSpeakerUrl, getCoHosts} from "../../utils";
+import {buildTitle, getCoHosts} from "../../utils";
+
 
 export async function getStaticPaths() {
   return getCoHosts().map(coH => ( {
@@ -20,13 +21,11 @@ coHost.metaDescription = coHost.metaDescription || coHost.about.split(".")[0];
 
 ---
 
-<Layout title={buildTitle(coHost.nickName)}
-        seo={buildStandardMetaObjects({
-        title: buildTitle(coHost.name),
-        description: coHost.metaDescription,
-        url: buildSpeakerUrl(coHost),
-        image: coHost.imageURL,
-    })}
+<Layout seo={{ 
+		title: buildTitle(coHost.name), 
+		description: coHost.metaDescription, 
+		image: coHost.imageUrl,
+	}}
 >
 
   <main class="relative flex flex-col justify-center">
