@@ -1,0 +1,90 @@
+---
+import { Image } from "@astrojs/image/components";
+import BackButton from "../../components/BackButton.astro";
+import Menu from "../../components/Menu.astro";
+import Layout from "../../layouts/Layout.astro";
+import { buildTitle, getCoHosts, getPodcastFeed, getSlug } from "../../utils";
+const { episodes } = await getPodcastFeed(
+  "https://www.spreaker.com/show/4173756/episodes/feed"
+);
+
+const coHosts = getCoHosts();
+---
+
+<Layout
+  seo={{
+    title: buildTitle("Speakers"),
+    description:
+      "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
+    image: "/mauro.png",
+  }}
+>
+  <main class="flex flex-col">
+    <Menu />
+    <div class="relative flex flex-col justify-center flex-grow">
+      <BackButton />
+      <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5">
+        <div class="flex flex-col justify-center">
+          <h2 class="mt-2 text-4xl font-bold text-slate-900">Hosts:</h2>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+            Nel nostro gitbar c'è sempre della birra fresca spillata da:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 py-4">
+            {
+              coHosts.map((coHost) => (
+                <a
+                  href={`/speakers/${coHost.nickName}`}
+                  class="flex flex-col items-center"
+                >
+                  <Image
+                    src={`${coHost.imageURL}`}
+                    width={120}
+                    height={135}
+                    alt={coHost.name}
+                  />
+                  <div class="font-bold text-slate-700 uppercase ">
+                    {coHost.nickName}
+                  </div>
+                  <div class="text-sm text-slate-500 ">{coHost.name}</div>
+                </a>
+              ))
+            }
+          </div>
+          <h2 class="text-4xl font-bold text-slate-900 mt-6">Guests:</h2>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+            Dietro i nostri microfoni si sono avvicendati grandi nomi dello
+            sviluppo software italiano
+          </p>
+
+          <div class="grid grid-cols-2 my-4">
+            {
+              episodes.map((e) => {
+                const guest = e.title.split("con ")?.[1];
+                return (
+                  guest && (
+                    <a
+                      class=" block m-1 px-2 py-1 text-sm text-slate-700 bg-slate-50 rounded leading-relaxed"
+                      href={"/episodes/" + getSlug(e)}
+                    >
+                      {guest}
+                    </a>
+                  )
+                );
+              })
+            }
+          </div>
+
+          <h2 class="text-4xl font-bold text-slate-900 mt-6">Contributor:</h2>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+            Questo sito è online grazie al contributo di <a
+              href="https://github.com/LucaRainone" class="underline text-slate-700">Luca Rainone</a
+            >
+            <a href="https://github.com/JellyBellyDev" class="underline text-slate-700">Andrea Giannantonio</a>
+            <a href="https://github.com/fsgreco" class="underline text-slate-700">Santiago (fsgreco)</a>
+            <a href="https://github.com/EmanueleGurini" class="underline text-slate-700">Emanuele Gurini</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

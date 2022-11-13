@@ -1,0 +1,33 @@
+---
+import BackButton from "../components/BackButton.astro";
+import Menu from "../components/Menu.astro";
+import Layout from "../layouts/Layout.astro";
+import { buildTitle } from "../utils";
+---
+
+<Layout
+  seo={{
+    title: buildTitle("Contatti"),
+    description:
+      "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
+    image: "/mauro.png",
+  }}
+>
+  <main class="flex flex-col">
+    <Menu />
+    <div class="relative flex flex-col justify-center flex-grow">
+      <BackButton />
+      <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5">
+        <div class="flex flex-col justify-center">
+          <h1 class="mt-2 text-4xl font-bold text-slate-900">Contattaci</h1>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+           Puoi entrare in contatto con noi scrivendo a info (at) gitbar (.) it o su twitter a @brainrepo.
+          </p>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+            Se non l'hai ancora fatto iscriviti al nostro gruppo telegram per entrare in contatto col la nostra community cliccando su <a href="https://t.me/gitbar">questo link</a>
+           </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -3,6 +3,7 @@ import { Image } from "@astrojs/image/components";
 import { Episode } from "@podverse/podcast-feed-parser";
 import slugify from "slugify";
 import BackButton from "../../components/BackButton.astro";
+import Menu from "../../components/Menu.astro";
 import Layout from "../../layouts/Layout.astro";
 import {buildTitle, getCoHosts} from "../../utils";
 
@@ -28,28 +29,32 @@ coHost.metaDescription = coHost.metaDescription || coHost.about.split(".")[0];
 	}}
 >
 
-  <main class="relative flex flex-col justify-center">
-    <BackButton />
-    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5 ">
-
-        <div class="grid grid-cols-1 justify-center md:grid-cols-[1fr_4fr] gap-4 items-center">
-          <Image
-          alt={coHost.nickName}
-          src={coHost.imageURL}
-          width={200}
-          height={220}
-          class=""
-        />
-
-        <div class="flex flex-col items-start flex-4 space-y-3">
-          <h1 class="mt-2 text-4xl font-bold text-slate-900">
-            {coHost.name} <span class="text-slate-500 font-normal">{coHost.nickName}</span>
-          </h1>
-    
-          <p class=" text-slate-800 leading-relaxed" set:html={coHost.about}></p>
+  <main  class="flex flex-col">
+    <Menu />
+    <div class="relative flex flex-col justify-center h-full">
+      <BackButton />
+      <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5 ">
+  
+          <div class="grid grid-cols-1 justify-center md:grid-cols-[1fr_4fr] gap-4 items-center">
+            <Image
+            alt={coHost.nickName}
+            src={coHost.imageURL}
+            width={200}
+            height={220}
+            class=""
+          />
+  
+          <div class="flex flex-col items-start flex-4 space-y-3">
+            <h1 class="mt-2 text-4xl font-bold text-slate-900">
+              {coHost.name} <span class="text-slate-500 font-normal">{coHost.nickName}</span>
+            </h1>
+      
+            <p class=" text-slate-800 leading-relaxed" set:html={coHost.about}></p>
+          </div>
         </div>
       </div>
     </div>
+
 
   </main>
 </Layout>

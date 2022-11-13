@@ -82,43 +82,50 @@ export const optimizeMetadescription = (description: string) => {
 export const getCoHosts = () => {
   return [
     {
-      name: "mattia tommasone",
-      nickName: "raibaz",
-      about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
-      imageURL: "/raibaz.png",
+      name: "Mauro Murru",
+      nickName: "brainrepo",
+      about: `Founder e Host di Gitbar, vive tra le baguette di Lione e le spiagge della Sardegna, oltre ad essere un giornalista iscritto all'albo è un senior software engineer a Nearform. Spende le sue giornate a cercare analogie e trovare collegamenti tra cose che non c'entrano niente tra loro.`,
+      imageURL: "/mauro.png",
     },
     {
-      name: "Alessio Biancalana",
-      nickName: "dottorblaster",
-      about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
-      imageURL: "/dottor-blaster.png",
-    },
-    {
-      name: "leo rossi",
-      nickName: "leo",
-      about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
-      imageURL: "/leo.png",
-    },
-    {
-      name: "luca",
+      name: "Luca Rainone",
       nickName: "chumkiu",
       about:
         "Ama definirsi Programmatore, e lo fa dal 2003: reinventa la ruota, assapora la vaniglia ed usa jQuery per riconoscenza.<br>Attualmente impegnato come CTO in una misteriosa startup.<br>Lo appassionano tante cose: dalla comunicazione all'usabilità, passando per la DX, l'Agile e la gestione di prodotto.<br>Appassionato papà, scopre coi suoi figli come fare le cose che avrebbe dovuto imparare da piccolo (come per esempio risolvere il cubo di Rubik).<br>Nel copioso tempo libero, suona la chitarra acustica in fingerpicking, fa ottime pizze napoletane.<br>Il suo prossimo obbiettivo è quello di non farsi più umiliare a scacchi su chess(.)com",
       imageURL: "/chumkiu.png",
     },
     {
-      name: "carmine",
+      name: "Mattia Tommasone",
+      nickName: "raibaz",
+      about:
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
+      imageURL: "/raibaz.png",
+    },
+    {
+      name: "Carmine Di Monaco",
       nickName: "guabanal",
       about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
       imageURL: "/guabanal.png",
     },
     {
+      name: "Alessio Biancalana",
+      nickName: "dottorblaster",
+      about:
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
+      imageURL: "/dottor-blaster.png",
+    },
+    {
+      name: "Leo Rossi",
+      nickName: "leo",
+      about:
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
+      imageURL: "/leo.png",
+    },
+
+    {
       name: "Andrea Giannantonio",
-      nickName: "JellyBellyDev",
+      nickName: "jellybellydev",
       about:
         "Abruzzese DOC ma romano d’adozione, grande appassionato di tecnologia, musica rap, serie tv e buon cibo. Si laurea in Tecnologie Informatiche alla Sapienza di Roma e dal 2008 macina codice in php e js con tanto focus sull'automazione. La sua fame di sapere lo porta ad esplorare sempre nuove tecnologie e metodologie. Negli ultimi anni ha sposato a pieno il tema della developer experience ed è un attivo sostenitore di diverse community e del mondo open source.",
       imageURL: "/JellyBellyDev.png",
