@@ -1,0 +1,13 @@
+---
+
+
+const { href } = Astro.props;
+
+
+---
+
+{
+
+    <a href={href} class="rounded-lg px-2 py-1 text-xs  text-slate-600 inline border border-slate-100 bg-slate-50">{href.replace("mailto:", "")}</a>
+  
+}

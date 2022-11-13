@@ -1,0 +1,44 @@
+---
+import { Image, Picture } from "@astrojs/image/components";
+import { fetch } from "fetch-opengraph";
+
+const { href } = Astro.props;
+
+let data;
+
+try {
+  data = await fetch(href);
+  console.log(data);
+} catch (e) {
+  console.log(e);
+  data = null;
+}
+---
+
+{
+  data ? (
+    <div><a
+      href={href}
+      class="rounded-lg p-2 overflow-hidden flex items-start border border-slate-100 bg-slate-50 my-1"
+    >
+      {data?.image && (
+        <img
+          src={data.image}
+          class="w-24 h-18 rounded mr-2 grow-0 shrink-0 object-cover inner-shadow"
+        />
+      )}
+      <div class="flex flex-col justify-center space-1">
+        {data?.title && (
+          <h3 class="text-sm font-bold text-slate-600  leading-normal">
+            {data?.title}
+          </h3>
+        )}
+        <p class="text-xs lg:text-xs text-slate-600 hidden lg:block lg:line-clamp-2">
+          {data?.description}
+        </p>
+      </div>
+    </a></div>
+  ) : (
+    <div><a href={href} class="rounded-lg p-2 text-sm font-bold text-slate-600 overflow-hidden border border-slate-100 bg-slate-50 my-1 leading-none">{href.replace("mailto:", "")}</a></div>
+  )
+}

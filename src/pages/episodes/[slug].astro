@@ -1,8 +1,12 @@
 ---
+
 import { Image } from "@astrojs/image/components";
 import { Episode } from "@podverse/podcast-feed-parser";
 import BackButton from "../../components/BackButton.astro";
+import ProseTitle from "../../components/ProseTitle.astro";
 import Layout from "../../layouts/Layout.astro";
+import  Markdown  from "../../libs/markdown/Markdown.astro";
+import TurndownService from "turndown";
 
 import {
   buildTitle,
@@ -12,9 +16,16 @@ import {
   getSlug,
   getSpreakerId,
   markdown,
-  getSeason, formatDate, formatDuration, prepareTitle } from "../../utils";
+  getSeason,
+  formatDate,
+  formatDuration,
+  prepareTitle,
+} from "../../utils";
+import LinkPreview from "../../components/LinkPreview.astro";
+import NormalLinkPreview from "../../components/NormalLinkPreview.astro";
 
-
+const turndownService = new TurndownService()
+turndownService.keep(['<br />'])
 
 export async function getStaticPaths() {
   const { episodes } = await getPodcastFeed(
@@ -39,21 +50,26 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
+const summary = turndownService.turndown(e.summary).split("\\").join(" ")
 
 ---
 
-<Layout seo={{ 
-	canonical: `/episodes/${getSlug(e)}`,
-	title: buildTitle(prepareTitle(e.title)[1]),
-	description: optimizeMetadescription(e.description),
-	image: e.imageURL
-}}>
+<Layout
+  seo={{
+    canonical: `/episodes/${getSlug(e)}`,
+    title: buildTitle(prepareTitle(e.title)[1]),
+    description: optimizeMetadescription(e.description),
+    image: e.imageURL,
+  }}
+>
   <main class="relative lg:min-h-screen flex flex-col">
     <BackButton />
-    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all">
-      <header class="flex flex-col  3xl:-ml-24 3xl:-mr-24">
+    <div
+      class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all"
+    >
+      <header class="flex flex-col 3xl:-ml-24 3xl:-mr-24">
         <div
-          class="md:grid w-full grid-cols-[max(250px),_1fr] flex flex-col gap-4  break-words"
+          class="md:grid w-full grid-cols-[max(250px),_1fr] flex flex-col gap-4 break-words"
         >
           <Image
             alt="copertina episodio"
@@ -73,35 +89,47 @@ const { e } = Astro.props;
             <h1 class="mt-2 text-4xl font-bold text-slate-900">
               {prepareTitle(e.title)[1]}
             </h1>
-          
-              <div
-                id="episode-4-title"
-                class="mt-2 text-lg font-bold text-slate-900 group-hover:text-slate-100"
+
+            <div
+              id="episode-4-title"
+              class="mt-2 text-lg font-bold text-slate-900 group-hover:text-slate-100"
+            >
+              <span
+                class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
               >
-               
-                <span
-                  class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
-                >
-                  Stagione {getSeason(e) }</span
-                >
-                <span
+                Stagione {getSeason(e)}</span
+              >
+              <span
                 class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
               >
                 Episodio {prepareTitle(e.title)[0]}</span
               >
               <span
-              class="bg-slate-800 text-white inline-block font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
-            >
-              Durata  {formatDuration(e.duration)}</span
-            >
-       
+                class="bg-slate-800 text-white inline-block font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
+              >
+                Durata {formatDuration(e.duration)}</span
+              >
             </div>
-      
           </div>
         </div>
       </header>
-
-      <p class=" text-slate-800 leading-relaxed" set:html={markdown(e.description)}></p>
+      {
+        summary
+          .split(/(?=##)/g)
+          .map((paragraph) => {
+            return (
+            <section class="leading-8 text-slate-700">
+              <Markdown
+                content={paragraph}
+                components={{ Heading: ProseTitle, ... (paragraph.startsWith('## Paese dei balocchi')?{Link: LinkPreview}:{Link: NormalLinkPreview}) }}
+                sanitize={{
+                  allowElements: ["h1", "h2", "h3", "ul", "li"],
+                  allowComponents: true,
+                }}
+              />
+            </section>
+          )})
+      }
     </div>
     <div
       class="sticky bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
