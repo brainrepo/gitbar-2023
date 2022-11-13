@@ -1,11 +1,10 @@
 ---
-
 import { Image } from "@astrojs/image/components";
 import { Episode } from "@podverse/podcast-feed-parser";
 import BackButton from "../../components/BackButton.astro";
 import ProseTitle from "../../components/ProseTitle.astro";
 import Layout from "../../layouts/Layout.astro";
-import  Markdown  from "../../libs/markdown/Markdown.astro";
+import Markdown from "../../libs/markdown/Markdown.astro";
 import TurndownService from "turndown";
 
 import {
@@ -15,7 +14,6 @@ import {
   getLegacySlug,
   getSlug,
   getSpreakerId,
-  markdown,
   getSeason,
   formatDate,
   formatDuration,
@@ -23,8 +21,9 @@ import {
 } from "../../utils";
 import LinkPreview from "../../components/LinkPreview.astro";
 import NormalLinkPreview from "../../components/NormalLinkPreview.astro";
+import Menu from "../../components/Menu.astro";
 
-const turndownService = new TurndownService()
+const turndownService = new TurndownService();
 
 export async function getStaticPaths() {
   const { episodes } = await getPodcastFeed(
@@ -49,8 +48,7 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
-const summary = turndownService.turndown(e.summary).split("\\").join("")
-
+const summary = turndownService.turndown(e.summary).split("\\").join("");
 ---
 
 <Layout
@@ -61,10 +59,12 @@ const summary = turndownService.turndown(e.summary).split("\\").join("")
     image: e.imageURL,
   }}
 >
+
   <main class="relative lg:min-h-screen flex flex-col">
+    <Menu />
     <BackButton />
     <div
-      class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all"
+      class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all lg:mt-6"
     >
       <header class="flex flex-col 3xl:-ml-24 3xl:-mr-24">
         <div
@@ -113,24 +113,26 @@ const summary = turndownService.turndown(e.summary).split("\\").join("")
         </div>
       </header>
 
-      
       {
-
-        summary
-          .split(/(?=##)/g)
-          .map((paragraph) => {
-            return (
+        summary.split(/(?=##)/g).map((paragraph) => {
+          return (
             <section class="leading-8 text-slate-700">
               <Markdown
                 content={paragraph}
-                components={{ Heading: ProseTitle, ... (paragraph.startsWith('## Paese dei balocchi')?{Link: LinkPreview}:{Link: NormalLinkPreview}) }}
+                components={{
+                  Heading: ProseTitle,
+                  ...(paragraph.startsWith("## Paese dei balocchi")
+                    ? { Link: LinkPreview }
+                    : { Link: NormalLinkPreview }),
+                }}
                 sanitize={{
                   allowElements: ["h1", "h2", "h3", "ul", "li"],
                   allowComponents: true,
                 }}
               />
             </section>
-          )})
+          );
+        })
       }
     </div>
     <div

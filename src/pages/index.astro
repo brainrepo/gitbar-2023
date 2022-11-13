@@ -1,8 +1,9 @@
 ---
 import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
+import Menu from "../components/Menu.astro";
 import Layout from "../layouts/Layout.astro";
-import { getPodcastFeed, buildTitle, buildStandardMetaObjects, buildHomepageUrl } from "../utils";
+import { getPodcastFeed } from "../utils";
 
 const data = await getPodcastFeed(
   "https://www.spreaker.com/show/4173756/episodes/feed"
@@ -15,10 +16,7 @@ const description = "Gitbar è il podcast per sviluppatori italiani dedicato all
 
 <Layout seo={{ title, description, image: "/mauro.png" }}>
   <main>
-    <div class="lg:hidden pb-3">
-      here hosts and more
-      <Hosts />
-    </div>
+    <Menu />
 
     <ul
       role="list"

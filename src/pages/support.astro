@@ -1,46 +1,50 @@
 ---
 import BackButton from "../components/BackButton.astro";
+import Menu from "../components/Menu.astro";
 import Layout from "../layouts/Layout.astro";
 import { buildTitle } from "../utils";
 ---
 
 <Layout
   seo={{
-    title: buildTitle("support"),
+    title: buildTitle("Supportaci"),
     description:
       "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.",
     image: "/mauro.png",
   }}
 >
-  <main class="relative flex flex-col justify-center">
-    <BackButton />
-    <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5">
-      <div class="flex flex-col justify-center">
-        <h1 class="mt-2 text-4xl font-bold text-slate-900">Supportaci</h1>
-        <p class="mt-2 text-base leading-7 text-gray-800">
-          Gitbar é un progetto titolo gratuito che vive dell'impegno dei suoi
-          host: Mauro <i>(Brainrepo)</i>, Carmine <i>(Guabanal)</i>, Alessio <i
-            >(Dottorblaster)</i
-          >, Leonardo <i>(Leo)</i>, Mattia <i>(Raibaz)</i>, Andrea <i
-            >(JellyBellyDev)</i
-          >, Luca <i>(Chumkiu)</i>. Per produrre gitbar l'impegno non basta, ci
-          sono le bollette da pagare, attrezzature da acquistare, ecc...
-        </p>
+  <main class="flex flex-col">
+    <Menu />
+    <div class="relative flex flex-col justify-center flex-grow">
+      <BackButton />
+      <div class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 space-y-5">
+        <div class="flex flex-col justify-center">
+          <h1 class="mt-2 text-4xl font-bold text-slate-900">Supportaci</h1>
+          <p class="mt-2 text-base leading-7 text-gray-800">
+            Gitbar é un progetto titolo gratuito che vive dell'impegno dei suoi
+            host: Mauro <i>(Brainrepo)</i>, Carmine <i>(Guabanal)</i>, Alessio <i
+              >(Dottorblaster)</i
+            >, Leonardo <i>(Leo)</i>, Mattia <i>(Raibaz)</i>, Andrea <i
+              >(JellyBellyDev)</i
+            >, Luca <i>(Chumkiu)</i>. Per produrre gitbar l'impegno non basta,
+            ci sono le bollette da pagare, attrezzature da acquistare, ecc...
+          </p>
 
-        <br />
+          <br />
 
-        <p class="font-bold">
-          Puoi diventare parte integrante del team di Gitbar offrendoci una <span
-            class="uppercase">birra</span
-          >.
-        </p>
+          <p class="font-bold">
+            Puoi diventare parte integrante del team di Gitbar offrendoci una <span
+              class="uppercase">birra</span
+            >.
+          </p>
 
-        <a
-          href="https://www.paypal.com/donate/?hosted_button_id=HGHZEH3GVSFQJ"
-          class="bg-slate-800 rounded-lg text-white hover:text-yellow-400 transition-all hover:shadow hover:-translate-x-2 lg:-left-8 2xl:-left-12 mt-8 lg:mt-6 shadow-lg z-40 px-5 h-16 flex items-center justify-center"
-        >
-          <span class="px-3 font-semibold">Supportaci ora usando PayPal</span>
-        </a>
+          <a
+            href="https://www.paypal.com/donate/?hosted_button_id=HGHZEH3GVSFQJ"
+            class="bg-slate-800 rounded-lg text-white hover:text-yellow-400 transition-all hover:shadow hover:-translate-x-2 lg:-left-8 2xl:-left-12 mt-8 lg:mt-6 shadow-lg z-40 px-5 h-16 flex items-center justify-center"
+          >
+            <span class="px-3 font-semibold">Supportaci ora usando PayPal</span>
+          </a>
+        </div>
       </div>
     </div>
   </main>
