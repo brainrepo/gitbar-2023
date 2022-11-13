@@ -25,7 +25,6 @@ import LinkPreview from "../../components/LinkPreview.astro";
 import NormalLinkPreview from "../../components/NormalLinkPreview.astro";
 
 const turndownService = new TurndownService()
-turndownService.keep(['<br />'])
 
 export async function getStaticPaths() {
   const { episodes } = await getPodcastFeed(
@@ -50,7 +49,7 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
-const summary = turndownService.turndown(e.summary).split("\\").join(" ")
+const summary = turndownService.turndown(e.summary).split("\\").join("")
 
 ---
 
@@ -113,7 +112,10 @@ const summary = turndownService.turndown(e.summary).split("\\").join(" ")
           </div>
         </div>
       </header>
+
+      
       {
+
         summary
           .split(/(?=##)/g)
           .map((paragraph) => {
