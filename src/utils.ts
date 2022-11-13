@@ -98,28 +98,28 @@ export const getCoHosts = () => {
       name: "Mattia Tommasone",
       nickName: "raibaz",
       about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
       imageURL: "/raibaz.png",
     },
     {
       name: "Carmine Di Monaco",
       nickName: "guabanal",
       about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
       imageURL: "/guabanal.png",
     },
     {
       name: "Alessio Biancalana",
       nickName: "dottorblaster",
       about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
       imageURL: "/dottor-blaster.png",
     },
     {
       name: "Leo Rossi",
       nickName: "leo",
       about:
-        "Software developer focused on business logic, web applications and 3d graphics, but with a broad spectrum of tiny projects realized for myself and friends up to now",
+        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
       imageURL: "/leo.png",
     },
 
