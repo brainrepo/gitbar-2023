@@ -116,10 +116,10 @@ export const getCoHosts = () => {
       imageURL: "/dottor-blaster.png",
     },
     {
-      name: "Leo Rossi",
-      nickName: "leo",
+      name: "Leonardo Rossi",
+      nickName: "leorossi",
       about:
-        "Vuoi sapere di più su di me? Tra qualche giorno troverai una mia bio. Promesso!",
+        "100% carne Fiorentina.<br/>Quando non scrivo codice ascolto podcast in bicicletta, oppure gioco a Padel. <br/>Sono un fan del git rebase.<br/>Preferisco il vino alla birra.",
       imageURL: "/leo.png",
     },
 
