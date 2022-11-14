@@ -3,7 +3,7 @@
 Questo sito è il nuovo sito di gitbar.
 Attinge alle informazioni del sito direttamente dal feed RSS saltando tutti i passaggi intermedi verso spreaker.
 
-Qui trovate il branch main in staging: https://gitbar-2023.netlify.app/
+Qui trovate il branch main in staging: https://www.gitbar.it/
 
 ## 🚀 Project Structure
 
