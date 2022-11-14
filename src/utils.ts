@@ -119,7 +119,7 @@ export const getCoHosts = () => {
       name: "Leonardo Rossi",
       nickName: "leorossi",
       about:
-        "100% carne Fiorentina. Quando non scrivo codice ascolto podcast in bicicletta, oppure gioco a Padel. <br/>Sono un fan del git rebase.<br/>Preferisco il vino alla birra.",
+        "100% carne Fiorentina.<br/>Quando non scrivo codice ascolto podcast in bicicletta, oppure gioco a Padel. <br/>Sono un fan del git rebase.<br/>Preferisco il vino alla birra.",
       imageURL: "/leo.png",
     },
 
