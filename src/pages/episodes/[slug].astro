@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
-const summary = turndownService.turndown(e.summary).split("\\").join("");
+const summary = turndownService.turndown(e.summary).split("\\").join("").split("---")[0];
 ---
 
 <Layout
