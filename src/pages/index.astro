@@ -2,6 +2,7 @@
 import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
 import Menu from "../components/Menu.astro";
+import Search from "../components/search";
 import Layout from "../layouts/Layout.astro";
 import { getPodcastFeed } from "../utils";
 
@@ -17,7 +18,7 @@ const description = "Gitbar è il podcast per sviluppatori italiani dedicato all
 <Layout seo={{ title, description, image: "/mauro.png" }}>
   <main>
     <Menu />
-
+    <Search client:load />
     <ul
       role="list"
       class="max-w-4xl 4xl:max-w-7xl mx-auto w-full p-2 sm:p-4 md:p-8 lg:p-8 grid 4xl:grid-cols-2 gap-2"
