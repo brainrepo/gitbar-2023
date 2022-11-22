@@ -14,7 +14,6 @@
     "@astrojs/image": "^0.8.1",
     "@astrojs/tailwind": "^2.0.2",
     "@lyrasearch/lyra": "^0.3.1",
-    "@microlink/react": "^5.5.9",
     "@podverse/podcast-feed-parser": "^1.1.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/markdown-it": "^12.2.3",
