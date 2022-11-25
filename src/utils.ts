@@ -132,3 +132,13 @@ export const getCoHosts = () => {
     },
   ];
 };
+
+export const getGuestName = (e : Episode) => {
+
+  const split : string = e.title.split("con ")?.[1];
+
+  return split?.match('[A-Z]{1}[a-z]* [A-Z]{1}[a-z]* \(.*\)')?.[0] ?
+    split?.match('[A-Z]{1}[a-z]* [A-Z]{1}[a-z]* \(.*\)')?.[0] :
+    split?.match('[A-Z]{1}[a-z]* [A-Z]{1}[a-z]*')?.[0];
+
+};
