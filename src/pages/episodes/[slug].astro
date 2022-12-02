@@ -64,7 +64,7 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
     <Menu />
     <BackButton />
     <div
-      class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-all lg:mt-6"
+      class="max-w-3xl 4xl:max-w-4xl mx-auto w-full p-8 flex-grow space-y-5 break-words lg:mt-6"
     >
       <header class="flex flex-col 3xl:-ml-24 3xl:-mr-24">
         <div
@@ -121,9 +121,13 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
                 content={paragraph}
                 components={{
                   Heading: ProseTitle,
-                  ...(paragraph.startsWith("## Paese dei balocchi")
-                    ? { Link: LinkPreview }
-                    : { Link: NormalLinkPreview }),
+                  // TODO: re enable after leaving netlify
+                  // downloading all link infos make the build slow
+                  // and netlify reaches the timeout limit. :(
+                  // find a better way maybe cashing the http calls
+                  /* ...(paragraph.startsWith("## Paese dei balocchi" ) */
+                  /*   ? { Link: LinkPreview } */
+                  /*   : { Link: NormalLinkPreview }), */
                 }}
                 sanitize={{
                   allowElements: ["h1", "h2", "h3", "ul", "li"],
