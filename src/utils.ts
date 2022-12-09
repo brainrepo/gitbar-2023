@@ -66,7 +66,7 @@ export const getPodcastFeed = async (url: string) => {
 };
 
 export const formatDate = (pubDate: string): string =>
-  format(new Date(pubDate), "EEEE, do MMMM yyyy 'ore' k:kk", {
+  format(new Date(pubDate), "EEEE, do MMMM yyyy 'ore' k:mm", {
     locale: it,
   });
 
@@ -142,3 +142,20 @@ export const getGuestName = (e : Episode) => {
     split?.match('[A-Z]{1}[a-z]* [A-Z]{1}[a-z]*')?.[0];
 
 };
+
+export function episodePages2Urls (pages:number) {
+  return (new Array(pages)).fill(0).map((_, index) => `page-${index + 1}`);
+}
+
+
+const EPISODES_PER_PAGE = 20;
+
+export function episodePagination(episodes: Episode[]) {
+  const numberOfPages = Math.ceil(episodes.length / EPISODES_PER_PAGE);
+  const pages = (new Array(numberOfPages)).fill(0).map((_, index) => ({
+    param: `page-${index + 1}`,
+    link: `/episodes/page-${index + 1}`
+  }))
+
+  return {numberOfPages, pages};
+}
