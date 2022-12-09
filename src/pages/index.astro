@@ -2,9 +2,10 @@
 import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
 import Menu from "../components/Menu.astro";
+import Pagination from "../components/Pagination.astro";
 import Search from "../components/search";
 import Layout from "../layouts/Layout.astro";
-import { getPodcastFeed } from "../utils";
+import { getPodcastFeed, episodePagination } from "../utils";
 
 const data = await getPodcastFeed(
   "https://www.spreaker.com/show/4173756/episodes/feed"
@@ -13,6 +14,7 @@ const data = await getPodcastFeed(
 const title = "Gitbar - Il podcast dei developer italiani"
 const description = "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."
 
+const pagination = episodePagination(data.episodes);
 ---
 
 <Layout seo={{ title, description, image: "/mauro.png" }}>
@@ -23,7 +25,9 @@ const description = "Gitbar è il podcast per sviluppatori italiani dedicato all
       role="list"
       class="max-w-4xl 4xl:max-w-7xl mx-auto w-full p-2 sm:p-4 md:p-8 lg:p-8 grid 4xl:grid-cols-2 gap-2"
     >
-      {data.episodes.map((e) => <EpisodeCard {...e} />)}
+      {data.episodes.slice(0, 20).map((e) => <EpisodeCard {...e} />)}
     </ul>
+
+    <Pagination currentPage={1} pages={pagination.pages} />
   </main>
 </Layout>
