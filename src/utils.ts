@@ -142,3 +142,7 @@ export const getGuestName = (e : Episode) => {
     split?.match('[A-Z]{1}[a-z]* [A-Z]{1}[a-z]*')?.[0];
 
 };
+
+export function episodePages2Urls (pages:number) {
+  return (new Array(pages)).fill(0).map((_, index) => `page-${index + 1}`);
+}

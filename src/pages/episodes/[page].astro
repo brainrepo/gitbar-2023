@@ -1,0 +1,56 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  getPodcastFeed,
+  episodePages2Urls,
+buildTitle,
+} from "../../utils";
+import Menu from "../../components/Menu.astro";
+import Search from "../../components/search";
+import EpisodeCard from "../../components/EpisodeCard.astro";
+import Pagination from "../../components/Pagination.astro";
+
+export async function getStaticPaths() {
+  const { episodes } = await getPodcastFeed(
+    "https://www.spreaker.com/show/4173756/episodes/feed"
+  );
+
+  const pages = Math.ceil(episodes.length / 20);
+
+  return episodePages2Urls(pages).map((url, index) => ({
+    params: {page: url},
+    props: {
+      episodes: episodes.slice(20 * index, 20 * (index +1)),
+      pages,
+      currentPage: index + 1
+    }
+  }));
+}
+
+const { episodes, pages, currentPage } = Astro.props;
+const {page} = Astro.params;
+---
+
+<Layout
+  seo={{
+    canonical: page === 'page-1' ? '/' : `/episodes/${page}`,
+    title: buildTitle('Tutti gli episodi - Pagina ' + currentPage),
+    description: 'Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo.',
+    image: '/mauro.png',
+  }}
+>
+  <main class="relative lg:min-h-screen flex flex-col">
+    <Menu />
+    <Search client:load />
+    <ul
+      role="list"
+      class="max-w-4xl 4xl:max-w-7xl mx-auto w-full p-2 sm:p-4 md:p-8 lg:p-8 grid 4xl:grid-cols-2 gap-2"
+    >
+      {episodes.map((e) => <EpisodeCard {...e} />)}
+    </ul>
+
+    <Pagination currentPage={currentPage} pages={episodePages2Urls(pages).map((url) => ({
+      link: `/episodes/${url}`
+    }))} />
+  </main>
+</Layout>
