@@ -66,7 +66,7 @@ export const getPodcastFeed = async (url: string) => {
 };
 
 export const formatDate = (pubDate: string): string =>
-  format(new Date(pubDate), "EEEE, do MMMM yyyy 'ore' k:kk", {
+  format(new Date(pubDate), "EEEE, do MMMM yyyy 'ore' k:mm", {
     locale: it,
   });
 
