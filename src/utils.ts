@@ -146,3 +146,16 @@ export const getGuestName = (e : Episode) => {
 export function episodePages2Urls (pages:number) {
   return (new Array(pages)).fill(0).map((_, index) => `page-${index + 1}`);
 }
+
+
+const EPISODES_PER_PAGE = 20;
+
+export function episodePagination(episodes: Episode[]) {
+  const numberOfPages = Math.ceil(episodes.length / EPISODES_PER_PAGE);
+  const pages = (new Array(numberOfPages)).fill(0).map((_, index) => ({
+    param: `page-${index + 1}`,
+    link: `/episodes/page-${index + 1}`
+  }))
+
+  return {numberOfPages, pages};
+}

@@ -2,8 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import {
   getPodcastFeed,
-  episodePages2Urls,
-buildTitle,
+  buildTitle,
+  episodePagination,
 } from "../../utils";
 import Menu from "../../components/Menu.astro";
 import Search from "../../components/search";
@@ -15,20 +15,20 @@ export async function getStaticPaths() {
     "https://www.spreaker.com/show/4173756/episodes/feed"
   );
 
-  const pages = Math.ceil(episodes.length / 20);
+  const pagination = episodePagination(episodes);
 
-  return episodePages2Urls(pages).map((url, index) => ({
-    params: {page: url},
+  return pagination.pages.map((page, index) => ({
+    params: {page: page.param},
     props: {
       episodes: episodes.slice(20 * index, 20 * (index +1)),
-      pages,
+      pagination,
       currentPage: index + 1
     }
   }));
 }
 
-const { episodes, pages, currentPage } = Astro.props;
-const {page} = Astro.params;
+const { episodes, currentPage, pagination } = Astro.props;
+const { page } = Astro.params;
 ---
 
 <Layout
@@ -49,8 +49,6 @@ const {page} = Astro.params;
       {episodes.map((e) => <EpisodeCard {...e} />)}
     </ul>
 
-    <Pagination currentPage={currentPage} pages={episodePages2Urls(pages).map((url) => ({
-      link: `/episodes/${url}`
-    }))} />
+    <Pagination currentPage={currentPage} pages={pagination.pages} />
   </main>
 </Layout>
