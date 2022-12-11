@@ -48,7 +48,11 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
-const summary = turndownService.turndown(e.summary).split("\\").join("").split("---")[0];
+const summary = turndownService
+  .turndown(e.summary)
+  .split("\\")
+  .join("")
+  .split("---")[0];
 ---
 
 <Layout
@@ -59,7 +63,6 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
     image: e.imageURL,
   }}
 >
-
   <main class="relative lg:min-h-screen flex flex-col">
     <Menu />
     <BackButton />
@@ -85,7 +88,7 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
             >
               {formatDate(e.pubDate)}
             </time>
-            <h1 class="mt-2 text-4xl font-bold text-slate-900">
+            <h1 class="mt-2 text-3xl lg:text-4xl font-bold text-slate-900">
               {prepareTitle(e.title)[1]}
             </h1>
 
