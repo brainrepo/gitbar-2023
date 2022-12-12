@@ -48,7 +48,11 @@ export async function getStaticPaths() {
 }
 
 const { e } = Astro.props;
-const summary = turndownService.turndown(e.summary).split("\\").join("").split("---")[0];
+const summary = turndownService
+  .turndown(e.summary)
+  .split("\\")
+  .join("")
+  .split("---")[0];
 ---
 
 <Layout
@@ -59,7 +63,6 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
     image: e.imageURL,
   }}
 >
-
   <main class="relative lg:min-h-screen flex flex-col">
     <Menu />
     <BackButton />
@@ -140,7 +143,7 @@ const summary = turndownService.turndown(e.summary).split("\\").join("").split("
       }
     </div>
     <div
-      class="sticky bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
+      class="sticky bottom-[3rem] lg:bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
     >
       <iframe
         class="top-0 bottom-0 w-full h-[100px] lg:h-[130px]"
