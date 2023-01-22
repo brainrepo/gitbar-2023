@@ -62,12 +62,10 @@ let transcription = null
 
 
 try {
-  const url = new URL(`../../../transcriptions/${numEpisode}.json`, import.meta.url);
-  const json = await fs.readFile(url, 'utf-8');
-  console.log(JSON.parse(json))
-  transcription = JSON.parse(json)?.segments;
+  const json =  await import(`../../transcriptions/${numEpisode}.json`);
+  transcription = json?.text
 } catch(e) {
-  console.log(e)
+  console.log(`Missing episode transcription: ${numEpisode} `)
 }
 
 ---
@@ -163,9 +161,9 @@ try {
       <section>
         <ProseTitle as="h1" text="Trascrizione" />
           
-        <p class="bg-gray-50 p-4 rounded">
-          {transcription.map((segment) => <span class="text-sm font-mono" set:html={segment.text.replace(". ", ". <br />")}/>)}
-        </p>
+        <div class="bg-gray-50 p-4 rounded space-y-3">
+          {transcription.split(". ").map((segment) => <p class="text-sm " set:html={segment + "."}/>)}
+        </div>
 
       </section> }
     </div>
