@@ -159,14 +159,15 @@ try {
         })
       }
 
+    { transcription &&
       <section>
         <ProseTitle as="h1" text="Trascrizione" />
           
-        <p>
-          {transcription.map((segment, i) => <span class="border border-gray-200 bg-yellow-50"  set:html={segment.text.replace(". ", ". <br />")}/>)}
+        <p class="bg-gray-50 p-4 rounded">
+          {transcription.map((segment) => <span class="text-sm font-mono" set:html={segment.text.replace(". ", ". <br />")}/>)}
         </p>
 
-      </section>
+      </section> }
     </div>
     <div
       class="sticky bottom-[3rem] lg:bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
