@@ -23,6 +23,8 @@ import LinkPreview from "../../components/LinkPreview.astro";
 import NormalLinkPreview from "../../components/NormalLinkPreview.astro";
 import Menu from "../../components/Menu.astro";
 
+import fs from "node:fs/promises";
+
 const turndownService = new TurndownService();
 
 export async function getStaticPaths() {
@@ -53,6 +55,21 @@ const summary = turndownService
   .split("\\")
   .join("")
   .split("---")[0];
+
+const numEpisode = prepareTitle(e.title)[0]
+
+let transcription = null
+
+
+try {
+  const url = new URL(`../../../transcriptions/${numEpisode}.json`, import.meta.url);
+  const json = await fs.readFile(url, 'utf-8');
+  console.log(JSON.parse(json))
+  transcription = JSON.parse(json)?.segments;
+} catch(e) {
+  console.log(e)
+}
+
 ---
 
 <Layout
@@ -104,7 +121,7 @@ const summary = turndownService
               <span
                 class="bg-slate-800 inline-block text-white font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
               >
-                Episodio {prepareTitle(e.title)[0]}</span
+                Episodio {numEpisode}</span
               >
               <span
                 class="bg-slate-800 text-white inline-block font-mono rounded font-normal text-sm px-2 mr-2 py-1 group-hover:hidden transition-all"
@@ -141,6 +158,15 @@ const summary = turndownService
           );
         })
       }
+
+      <section>
+        <ProseTitle as="h1" text="Trascrizione" />
+          
+        <p>
+          {transcription.map((segment, i) => <span class="border border-gray-200 bg-yellow-50"  set:html={segment.text.replace(". ", ". <br />")}/>)}
+        </p>
+
+      </section>
     </div>
     <div
       class="sticky bottom-[3rem] lg:bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"

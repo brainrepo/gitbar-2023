@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@astrojs/react": "^1.2.2",
+    "@types/node": "^18.11.18",
     "@types/turndown": "^5.0.1",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.5.5",
