@@ -35,10 +35,14 @@ const Search = () => {
   const find = useCallback(
     (term: string) => {
       setQuery(term);
-      const res = search(DB, {
-        term,
-        properties: "*",
-      })?.hits?.map((e) => e.document);
+      const res = search(
+        DB,
+        {
+          term,
+          properties: "*",
+        },
+        "italian"
+      )?.hits?.map((e) => e.document);
       setResults(res);
     },
     [DB, setResults]
