@@ -1,0 +1,25 @@
+---
+import EpisodeCard from "../components/EpisodeCard.astro";
+import Hosts from "../components/Hosts.astro";
+import Menu from "../components/Menu.astro";
+import Pagination from "../components/Pagination.astro";
+import Search from "../components/searchAdvanced";
+import Layout from "../layouts/Layout.astro";
+import { getPodcastFeed, episodePagination } from "../utils";
+
+const data = await getPodcastFeed(
+  "https://www.spreaker.com/show/4173756/episodes/feed"
+)
+
+const title = "Gitbar - Il podcast dei developer italiani"
+const description = "Gitbar è il podcast per sviluppatori italiani dedicato alla programmazione e allo sviluppo web. Ogni giovedì un nuovo argomento con brainrepo."
+
+const pagination = episodePagination(data.episodes);
+---
+
+<Layout seo={{ title, description, image: "/mauro.png" }}>
+  <main>
+    <Menu />
+    <Search client:load />
+  </main>
+</Layout>

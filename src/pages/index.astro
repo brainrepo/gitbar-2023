@@ -3,7 +3,6 @@ import EpisodeCard from "../components/EpisodeCard.astro";
 import Hosts from "../components/Hosts.astro";
 import Menu from "../components/Menu.astro";
 import Pagination from "../components/Pagination.astro";
-import Search from "../components/search";
 import Layout from "../layouts/Layout.astro";
 import { getPodcastFeed, episodePagination } from "../utils";
 
@@ -20,7 +19,13 @@ const pagination = episodePagination(data.episodes);
 <Layout seo={{ title, description, image: "/mauro.png" }}>
   <main>
     <Menu />
-    <Search client:load />
+  <a href="/advanced-search" class="p-4 mx-4 mt-4 bg-yellow-500 rounded text-white font-semibold flex">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+
+    <div class="ml-3">Clicca per cercare cosa abbiamo detto all'interno degli episodi</div>
+  </a>
     <ul
       role="list"
       class="max-w-4xl 4xl:max-w-7xl mx-auto w-full p-2 sm:p-4 md:p-8 lg:p-8 pb-10 lg:pb-0 grid 4xl:grid-cols-2 gap-2"
