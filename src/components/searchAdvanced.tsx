@@ -162,7 +162,7 @@ const Search = () => {
       {!isLoading && !query.length ? (
         <div className="p-6 m-6 rounded text-slate-800 bg-slate-100 text-lg text-center lg:animate-bounce">
           Inizia a cercare, abbiamo indicizzato tutte le parole pronunciate
-          all'interno delle nostre puntate. Attualemente solo le ultime puntate
+          all'interno delle nostre puntate. Attualmente solo le ultime puntate
           sono ricercabili, stiamo continuamente trascrivendo a ritroso fino ad
           arrivare alla puntata 1.
         </div>
