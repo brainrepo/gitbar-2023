@@ -14,6 +14,8 @@
     "@astrojs/image": "^0.8.1",
     "@astrojs/tailwind": "^2.0.2",
     "@lyrasearch/lyra": "^0.4.1",
+    "@orama/orama": "^1.0.0-beta.16",
+    "@orama/stemmers": "^1.0.0-beta.16",
     "@podverse/podcast-feed-parser": "^1.1.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/markdown-it": "^12.2.3",

@@ -1,10 +1,8 @@
-import { search, create, load } from "@lyrasearch/lyra";
-
+import { search, create, load } from "@orama/orama";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { formatDuration } from "../utils/time";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { PropertiesSchema, ResolveSchema } from "@lyrasearch/lyra/dist/types";
 
 const Search = () => {
   const [DB, setDB] = useState(null);
@@ -23,7 +21,6 @@ const Search = () => {
           path: "string",
           mp3url: "string",
         },
-        edge: true,
       });
       setIsLoading(true);
       const resp = await fetch(`/in_episode.db.json`);
@@ -40,15 +37,11 @@ const Search = () => {
     async (term: string) => {
       setQuery(term);
       const res = (
-        await search(
-          DB,
-          {
-            term,
-            properties: "*",
-            limit: 100,
-          },
-          "italian"
-        )
+        await search(DB, {
+          term,
+          properties: "*",
+          limit: 100,
+        })
       )?.hits?.map((e) => e.document);
 
       const groups = res.reduce((groups, item) => {
