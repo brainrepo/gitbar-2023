@@ -3,7 +3,6 @@ import { getPodcastFeed } from "../utils";
 import fs from "fs/promises";
 import { AstroConfig } from "astro";
 import { create, insertMultiple, save } from "@orama/orama";
-import { stemmer } from "@orama/stemmers/italian";
 
 let cfFolder: AstroConfig;
 
