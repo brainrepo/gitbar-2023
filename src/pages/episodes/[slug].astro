@@ -28,10 +28,12 @@ import fs from "node:fs/promises";
 const turndownService = new TurndownService();
 
 export async function getStaticPaths() {
+  console.log("paths");
   const { episodes } = await getPodcastFeed(
     "https://www.spreaker.com/show/4173756/episodes/feed"
   );
-  return episodes.reduce(
+
+  const pages = episodes.reduce(
     (acc: { params: { slug: string; props: Episode } }[], e: Episode) => {
       return [
         ...acc,
@@ -47,6 +49,7 @@ export async function getStaticPaths() {
     },
     []
   );
+  return pages;
 }
 
 const { e } = Astro.props;
@@ -56,18 +59,16 @@ const summary = turndownService
   .join("")
   .split("---")[0];
 
-const numEpisode = prepareTitle(e.title)[0]
+const numEpisode = prepareTitle(e.title)[0];
 
-let transcription = null
-
+let transcription = null;
 
 try {
-  const json =  await import(`../../transcriptions/${numEpisode}.json`);
-  transcription = json?.text
-} catch(e) {
-  console.log(`Missing episode transcription: ${numEpisode} `)
+  const json = await import(`../../transcriptions/${numEpisode}.json`);
+  transcription = json?.text;
+} catch (e) {
+  console.log(`Missing episode transcription: ${numEpisode} `);
 }
-
 ---
 
 <Layout
@@ -157,15 +158,19 @@ try {
         })
       }
 
-    { transcription &&
-      <section>
-        <ProseTitle as="h1" text="Trascrizione" />
-          
-        <div class="bg-gray-50 p-4 rounded space-y-3">
-          {transcription.split(". ").map((segment) => <p class="text-sm " set:html={segment + "."}/>)}
-        </div>
+      {
+        transcription && (
+          <section>
+            <ProseTitle as="h1" text="Trascrizione" />
 
-      </section> }
+            <div class="bg-gray-50 p-4 rounded space-y-3">
+              {transcription.split(". ").map((segment) => (
+                <p class="text-sm " set:html={segment + "."} />
+              ))}
+            </div>
+          </section>
+        )
+      }
     </div>
     <div
       class="sticky bottom-[3rem] lg:bottom-0 -ml-[99px] lg:-ml-[129px] right-0 h-[100px] lg:h-[130px] z-20 bg-white overflow-hidden shadow-lg"
