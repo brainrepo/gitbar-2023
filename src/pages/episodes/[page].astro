@@ -11,7 +11,7 @@ import Pagination from "../../components/Pagination.astro";
 
 export async function getStaticPaths() {
   const { episodes } = await getPodcastFeed(
-    "https://www.spreaker.com/show/4173756/episodes/feed"
+    "https://api.riverside.fm/hosting/B4uOwdEh.rss"
   );
 
   const pagination = episodePagination(episodes);

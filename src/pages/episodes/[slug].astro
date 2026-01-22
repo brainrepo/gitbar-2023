@@ -30,7 +30,7 @@ const turndownService = new TurndownService();
 export async function getStaticPaths() {
   console.log("paths");
   const { episodes } = await getPodcastFeed(
-    "https://www.spreaker.com/show/4173756/episodes/feed"
+    "https://api.riverside.fm/hosting/B4uOwdEh.rss"
   );
 
   const pages = episodes.reduce(
