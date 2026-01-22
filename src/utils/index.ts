@@ -21,7 +21,7 @@ export const getSlug = (episode: Episode) =>
   })}`;
 
 export const getLegacySlug = (episode: Episode) =>
-  `${slugify(episode.link.replace("https://www.spreaker.com/episode/", ""), {
+  `${slugify(episode.link?.replace("https://www.spreaker.com/episode/", ""), {
     remove: /[*+~.()'"!\?,:@]/g,
     lower: true, // convert to lower case, defaults to `false`
     strict: false,
@@ -62,10 +62,10 @@ export const formatDate = (pubDate: string): string =>
 export const buildTitle = (...pageTitles: string[]) =>
   [...pageTitles, mainTitle].filter((item) => item !== "").join(" | ");
 export const optimizeMetadescription = (description: string) => {
-  if (description.split("##").length > 1) {
-    return description.split("##")[0].replace(/<.*?\/>/g, "");
+  if (description?.split("##").length > 1) {
+    return description?.split("##")[0].replace(/<.*?\/>/g, "");
   }
-  return description.split(".")[0].replace(/<.*?\/>/g, "");
+  return description?.split(".")[0].replace(/<.*?\/>/g, "");
 };
 
 export const getCoHosts = () => {
